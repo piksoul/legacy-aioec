@@ -272,8 +272,13 @@ class Ai1ec_Front_Controller {
      */
     protected function _init( $ai1ec_loader ) {
         $exception = null;
-        // Load the textdomain
-        add_action( 'plugins_loaded', array( $this, 'load_textdomain' ) );
+        // Load the textdomain at the earliest possible priority on
+        // `plugins_loaded` so it always runs before any other plugins_loaded
+        // callback that might trigger a translation function - e.g.
+        // register_extensions() (priority 1) and Ai1ec_Css_Frontend::
+        // render_css() (priority 2) - avoiding WordPress's "translation
+        // loading triggered too early" doing_it_wrong notice.
+        add_action( 'plugins_loaded', array( $this, 'load_textdomain' ), 0 );
         try {
             // Initialize the registry object
             $this->_initialize_registry( $ai1ec_loader );
