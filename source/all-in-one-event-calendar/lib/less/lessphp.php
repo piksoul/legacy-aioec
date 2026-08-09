@@ -378,13 +378,20 @@ class Ai1ec_Less_Lessphp extends Ai1ec_Base {
                 unset( $variables[$name] );
             }
             else {
-                // If description is requested and is available in config file, use it.
+                // If description is requested and is available in config file, use
+                // it. Translated here (rather than in the theme's
+                // user_variables.php, where it's just a raw string) so that
+                // translation only happens when a description is actually
+                // needed - this file is loaded on every CSS compile, including
+                // from code paths that run before WordPress has loaded the
+                // plugin's textdomain.
                 if (
                     $with_description &&
                     isset( $variables_from_config[$name]['description'] )
                 ) {
-                    $variables[$name]['description'] =
-                        $variables_from_config[$name]['description'];
+                    $variables[$name]['description'] = Ai1ec_I18n::__(
+                        $variables_from_config[$name]['description']
+                    );
                 } else {
                     unset( $variables[$name]['description'] );
                 }
