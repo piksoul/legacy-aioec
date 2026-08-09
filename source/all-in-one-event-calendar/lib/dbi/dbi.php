@@ -184,7 +184,14 @@ class Ai1ec_Dbi {
         $query = preg_replace( '|(?<!%)%f|', '%F', $query ); // Force floats to be locale unaware
         $query = preg_replace( '|(?<!%)%s|', "'%s'", $query ); // quote the strings, avoiding escaped strings like %%s
         array_walk( $args, array( $this->_dbi, 'escape_by_ref' ) );
-        return @vsprintf( $query, $args );
+        // PHP 8 turns a placeholder/argument count mismatch into an
+        // ArgumentCountError instead of the old E_WARNING + false/null
+        // return; catch it to preserve the documented false-on-error result.
+        try {
+            return @vsprintf( $query, $args );
+        } catch ( ArgumentCountError $e ) {
+            return false;
+        }
     }
 
     /**

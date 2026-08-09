@@ -638,7 +638,7 @@ class UtilSelect
              IcaldateTime $workEnd,
                           $compStartHis,
                   array & $exdateList,
-             DateInterval $compDuration = null
+            ?DateInterval $compDuration = null
     ) {
         $exdateYmdList = UtilSelect::getYmdList($exdateList );
         $recurYmdList  = UtilSelect::getYmdList($recurList );
@@ -698,7 +698,7 @@ class UtilSelect
                           $format,
                   array & $exdateList,
                           $compStartHis,
-             DateInterval $compDuration = null
+            ?DateInterval $compDuration = null
     ) {
         $exdateYmdList = UtilSelect::getYmdList( $exdateList );
         $recurYmdList  = UtilSelect::getYmdList( $recurList );

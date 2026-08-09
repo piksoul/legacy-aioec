@@ -102,7 +102,7 @@ class Ai1ec_Less_Lessphp extends Ai1ec_Base {
      * @throws Exception
      * @return string
      */
-    public function parse_less_files( array $variables = null, $compile_core = false ) {
+    public function parse_less_files( ?array $variables = null, $compile_core = false ) {
         // If no variables are passed, initialize from DB, config file, and
         // extension injections in one call.
         if ( empty( $variables ) ) {

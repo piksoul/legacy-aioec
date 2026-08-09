@@ -220,7 +220,7 @@ class Ai1ec_Css_Frontend extends Ai1ec_Base {
      * @return boolean                     Whether successful
      */
     public function invalidate_cache(
-        array $variables    = null,
+        ?array $variables   = null,
         $update_persistence = false
     ) {
         if ( ! $this->lessphp_controller->is_compilation_needed( $variables ) ) {

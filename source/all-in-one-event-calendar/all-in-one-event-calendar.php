@@ -5,10 +5,26 @@
  * Description: A calendar system with month, week, day, agenda views, upcoming events widget, color-coded categories, recurrence, and import/export of .ics feeds.
  * Author: Time.ly Network Inc.
  * Author URI: https://time.ly/
- * Version: 3.0.1
+ * Version: 3.0.1.1
  * Text Domain: all-in-one-event-calendar
  * Domain Path: /language
  * Requires PHP: 7.2
+ * Update URI: false
+ */
+
+/*
+ * LOCAL PATCH NOTES (3.0.1.1)
+ * ----------------------------------------------------------------------
+ * This is a locally patched build of the upstream 3.0.1 release, not the
+ * stock plugin. See README.md at the repository root for the full history.
+ * Summary: fixed PHP 8 fatal/deprecation notices in the standalone (non-
+ * cloud) engine, deferred an early textdomain-load notice to `init`, and
+ * disabled both of the plugin's update-check paths (wordpress.org, via
+ * the "Update URI: false" header above, and Time.ly's own update.time.ly/
+ * checkout.time.ly polling in app/controller/front.php) so this build
+ * cannot be silently overwritten by a stock/cloud-forced release.
+ * Do NOT run "Update Now" on this plugin from wordpress.org or accept a
+ * Time.ly-prompted update without re-applying these patches first.
  */
 
 /* check database exists to identify old users*/

@@ -244,7 +244,7 @@ class Ai1ec_Theme_Loader {
         $args            = array(),
         $is_admin        = false,
         $throw_exception = true,
-        array $paths     = null
+        ?array $paths    = null
     ) {
         $dot_position = strrpos( $filename, '.' ) + 1;
         $ext          = substr( $filename, $dot_position );

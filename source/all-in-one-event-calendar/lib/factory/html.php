@@ -153,7 +153,7 @@ class Ai1ec_Factory_Html extends Ai1ec_Base {
     public function create_select2_multiselect(
         array $args,
         array $options,
-        array $view_args = null
+        ?array $view_args = null
     ) {
         // if no data is present and we are in the frontend, return a blank
         // element.

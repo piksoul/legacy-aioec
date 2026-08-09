@@ -132,7 +132,7 @@ class Ai1ec_Robots_Helper extends Ai1ec_Base {
      * @param  string $public Public flag
      * @return array
      */
-    public function rules( $output = '', $public ) {
+    public function rules( $output = '', $public = true ) {
         // Current rules
         $current_rules = array_map(
             'trim',

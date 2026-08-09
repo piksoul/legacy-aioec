@@ -120,7 +120,7 @@ class Ai1ec_Loader {
      * @return bool|array False on failure, true on success in writer
      *         mode, cached entry in reader mode on success
      */
-    protected function _cache( $path, array $entries = null ) {
+    protected function _cache( $path, ?array $entries = null ) {
         $cache_file = $this->_get_cache_file_path( $path );
         if ( $entries ) {
             if (
