@@ -66,7 +66,7 @@ class Ai1ec_Request_Parser extends Ai1ec_Abstract_Query {
      */
     public function __construct(
         Ai1ec_Registry_Object $registry,
-        array $argv     = null,
+        ?array $argv    = null,
         $default_action = null
     ) {
         parent::__construct( $registry, $argv );

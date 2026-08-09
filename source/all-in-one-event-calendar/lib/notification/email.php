@@ -35,7 +35,7 @@ class Ai1ec_Email_Notification extends Ai1ec_Notification {
         $message,
         array $recipients,
         $subject,
-        array $replyTo = null
+        ?array $replyTo = null
     ) {
         parent::__construct( $registry );
         $this->_message    = $message;
