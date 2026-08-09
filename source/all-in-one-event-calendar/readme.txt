@@ -3,7 +3,7 @@ Contributors: timelynetwork
 Tags: calendar, event, events, event manager, event management
 Requires at least: 5.0
 Tested up to: 6.3
-Stable tag: 3.0.1
+Stable tag: 3.0.1.1
 Requires PHP: 7.2
 License: GNU General Public License, version 3 (GPL-3.0)
 
@@ -155,6 +155,21 @@ Timely offers the most comprehensive and flexible event management platform avai
 * [timely-calendar]
 
 == Changelog ==
+
+= Version 3.0.1.1 (local patch, not an official Time.ly release) =
+* Fixed PHP 8 fatal error and deprecation notices in the standalone
+  (non-cloud) calendar engine (create_function() removal, optional-
+  before-required parameter deprecations, implicit-nullable-parameter
+  deprecations, preg_match() null-flags deprecation, Twig 1.x
+  Countable/IteratorAggregate return-type deprecation).
+* Deferred an admin-notice translation call that ran before WordPress's
+  `init` hook, which was triggering a "translation loading triggered
+  too early" doing_it_wrong notice on every request.
+* Disabled this plugin's wordpress.org update check (`Update URI: false`
+  header) and its own proprietary update.time.ly/checkout.time.ly
+  update-check polling, so this patched build cannot be silently
+  overwritten by an official or cloud-forced update. See the LOCAL
+  PATCH NOTES comment in all-in-one-event-calendar.php and README.md.
 
 = Version 3.0.1 =
 * Improve performance by avoiding the complete application reload.

@@ -876,16 +876,23 @@ class Ai1ec_Front_Controller {
                 'admin_menu',
                 array( 'view.admin.widget-creator', 'add_page' )
             );
-            $dispatcher->register_filter(
-                'pre_set_site_transient_update_plugins',
-                array( 'calendar.updates', 'check_updates' )
-            );
-            $dispatcher->register_filter(
-                'plugins_api',
-                array( 'calendar.updates', 'plugins_api_filter' ),
-                10,
-                3
-            );
+            // Locally disabled: this plugin's own out-of-band update
+            // channel (Ai1ec_Calendar_Updates) polls update.time.ly /
+            // checkout.time.ly and injects whatever it returns straight
+            // into WordPress's normal update-plugins UI, independent of
+            // wordpress.org. Left unregistered here so this patched build
+            // can't be silently replaced by a Time.ly-pushed release. See
+            // the LOCAL PATCH NOTES in the main plugin file.
+            // $dispatcher->register_filter(
+            //     'pre_set_site_transient_update_plugins',
+            //     array( 'calendar.updates', 'check_updates' )
+            // );
+            // $dispatcher->register_filter(
+            //     'plugins_api',
+            //     array( 'calendar.updates', 'plugins_api_filter' ),
+            //     10,
+            //     3
+            // );
             $dispatcher->register_action(
                 'admin_menu',
                 array( 'view.admin.tickets', 'add_page' )
