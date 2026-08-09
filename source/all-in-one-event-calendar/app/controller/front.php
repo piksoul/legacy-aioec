@@ -349,18 +349,12 @@ class Ai1ec_Front_Controller {
                 // It's missing; something is wrong with this theme. Reset theme to
                 // Vortex and warn the user accordingly.
                 $option->set( 'ai1ec_current_theme', $this->_default_theme );
-                $notification = $this->_registry->get( 'notification.admin' );
-                $notification->store(
-                    sprintf(
-                        Ai1ec_I18n::__(
-                            'Your active calendar theme could not be properly initialized. The default theme has been activated instead. Please visit %s and try reactivating your theme manually.'
-                        ),
-                        '<a href="' . ai1ec_admin_url( AI1EC_THEME_SELECTION_BASE_URL ) . '">' .
-                        Ai1ec_I18n::__( 'Calendar Themes' ) . '</a>'
-                    ),
-                    'error',
-                    1
-                );
+                // This whole controller boots synchronously at plugin-file-load
+                // time, well before WordPress fires `init` and loads the plugin's
+                // textdomain, so defer the translated notice until `init` instead
+                // of calling Ai1ec_I18n::__() here (avoids the WP "translation
+                // loading triggered too early" doing_it_wrong notice).
+                add_action( 'init', array( $this, 'notify_theme_reset' ) );
             }
 
             $theme = array(
@@ -388,6 +382,33 @@ class Ai1ec_Front_Controller {
             $theme = apply_filters( 'ai1ec_pre_save_current_theme', $theme );
             $option->set( 'ai1ec_current_theme', $theme );
         }
+    }
+
+    /**
+     * Notify the admin that the active theme could not be initialized and
+     * was reset to the default.
+     *
+     * Deferred from _add_default_theme_if_not_set() to `init` so that
+     * translation functions aren't invoked before WordPress has loaded the
+     * plugin's textdomain.
+     *
+     * @wp_hook init
+     *
+     * @return void
+     */
+    public function notify_theme_reset() {
+        $notification = $this->_registry->get( 'notification.admin' );
+        $notification->store(
+            sprintf(
+                Ai1ec_I18n::__(
+                    'Your active calendar theme could not be properly initialized. The default theme has been activated instead. Please visit %s and try reactivating your theme manually.'
+                ),
+                '<a href="' . ai1ec_admin_url( AI1EC_THEME_SELECTION_BASE_URL ) . '">' .
+                Ai1ec_I18n::__( 'Calendar Themes' ) . '</a>'
+            ),
+            'error',
+            1
+        );
     }
 
     /**
